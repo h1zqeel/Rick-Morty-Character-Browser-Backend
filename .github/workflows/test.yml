@@ -24,4 +24,4 @@ jobs:
       - name: Install Node modules
         run: npm ci
       - name: Run Tests
-        run: npm run test:only
+        run: npm run test
