@@ -1,8 +1,23 @@
 import axios from './axios.js';
 import { CharacterParams } from '../interfaces/Filter.js';
+import { Character } from '../interfaces/Character.js';
 const END_POINT = '/graphql';
 
-const getcharacters = async ({ page = 1, filter = {} }: CharacterParams) => {
+function sortCharactersByName(array: Character[], order : string) {
+	if (!order || order === 'None') return array;
+	return array.sort((a, b) => {
+	  if (a.name < b.name) return order === 'asc' ? -1 : 1;
+	  if (a.name > b.name) return order === 'asc' ? 1 : -1;
+	  return 0;
+	});
+  }
+
+function filterByName (array: Character[], name: string) {
+	if (!name) return array;
+	return array.filter((character) => character.name.toLowerCase().includes(name.toLowerCase()));
+}
+
+const getcharacters = async ({ page = 1, filter = {}, order, name }: CharacterParams) => {
 	let filterQuery = '';
 
 	if (filter.status) {
@@ -38,6 +53,14 @@ const getcharacters = async ({ page = 1, filter = {} }: CharacterParams) => {
 	const response = await axios.post(END_POINT, {
 		query: graphqlQuery.query
 	});
+
+	if(order){
+		response.data.data.characters.results = sortCharactersByName(response.data.data.characters.results, order);
+	}
+
+	if(name){
+		response.data.data.characters.results = filterByName(response.data.data.characters.results, name);
+	}
 
 	return response.data.data.characters;
 };

@@ -43,10 +43,11 @@ const typeDefs = `#graphql
   input CharacterFilter {
     status: String
     species: String
+    name: String
   }
 
   type Query {
-    characters(page: Int, filter: CharacterFilter): PaginatedCharacters
+    characters(page: Int, filter: CharacterFilter, order: String): PaginatedCharacters
     character(id: Int!): Character
   }
 `;

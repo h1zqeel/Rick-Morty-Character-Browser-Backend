@@ -6,6 +6,8 @@ export type CharacterFilter = {
 export type CharacterParams = {
 	page: number;
 	filter: CharacterFilter;
+	order: string;
+	name: string;
 };
 
 export type SingleCharacterParams = {

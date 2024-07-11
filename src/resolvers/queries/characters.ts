@@ -2,9 +2,9 @@ import { getCharacter, getcharacters } from '../../data/characters.js';
 import { GraphQLError } from 'graphql';
 import { CharacterParams, SingleCharacterParams } from '../../interfaces/Filter.js';
 
-const characters = async (_: unknown, { page, filter = {} }: CharacterParams) => {
+const characters = async (_: unknown, { page, filter = {}, order, name }: CharacterParams) => {
 	try {
-		const data = await getcharacters({ page, filter });
+		const data = await getcharacters({ page, filter, order, name });
 		return data;
 	} catch (error) {
 		console.log({ error });
