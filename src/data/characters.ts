@@ -59,6 +59,13 @@ const getCharacter = async (id: number) => {
 							dimension,
 							created
 						},
+						origin {
+							id,
+							name,
+							type,
+							dimension,
+							created
+						},
 						episode {
 							id,
 							name,
