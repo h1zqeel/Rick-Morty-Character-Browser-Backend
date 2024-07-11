@@ -8,6 +8,7 @@ Ensure you have the following installed:
 
 - Node.js v18 or higher
 - npm (Node Package Manager)
+- git
 
 The project was built and tested with Node.js v20.
 
