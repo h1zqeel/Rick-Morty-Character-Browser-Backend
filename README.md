@@ -49,3 +49,174 @@ This will compile TypeScript files (`tsc`) and then start the Node server (`node
 - `lint`: Runs ESLint to lint the project files.
 - `format`: Formats the TypeScript files using Prettier.
 - `test`: Runs Jest for testing with experimental VM modules enabled (`NODE_OPTIONS=--experimental-vm-modules jest`).
+
+## API Documentation
+
+### Base URL
+
+```
+https://rick-morty-character-browser-backend.onrender.com/graphql
+```
+
+### Authentication
+
+This API does not require authentication.
+
+### Queries
+
+#### `characters`
+
+Retrieve a list of characters with pagination support.
+
+##### Arguments
+
+- `page`: Optional. Page number for pagination.
+- `filter`: Optional. Filter characters by status, species, or name.
+- `order`: Optional. Sort order for results.
+
+##### Response
+
+```graphql
+type PaginatedCharacters {
+  info: CharacterPaginationInfo
+  results: [Character]
+}
+
+type CharacterPaginationInfo {
+  count: Int
+  pages: Int
+  next: Int
+  prev: Int
+}
+
+type Character {
+  id: ID
+  name: String
+  image: String
+  status: String
+  species: String
+  location: Location
+  origin: Location
+  episode: [Episode]
+}
+
+type Location {
+  id: ID
+  name: String
+  type: String
+  dimension: String
+  residents: [Character]!
+  created: String
+}
+
+type Episode {
+  id: ID
+  name: String
+  air_date: String
+  episode: String
+  characters: [Character]!
+  created: String
+}
+```
+
+#### `character`
+
+Retrieve a single character by ID.
+
+##### Arguments
+
+- `id`: Required. ID of the character.
+
+##### Response
+
+```graphql
+type Character {
+  id: ID
+  name: String
+  image: String
+  status: String
+  species: String
+  location: Location
+  origin: Location
+  episode: [Episode]
+}
+```
+
+### Example Queries
+
+#### Retrieve Characters
+
+```graphql
+query {
+  characters(page: 1, filter: { status: "Alive", species: "Human" }, order: "name") {
+    info {
+      count
+      pages
+      next
+      prev
+    }
+    results {
+      id
+      name
+      image
+      status
+      species
+      location {
+        id
+        name
+        type
+      }
+      origin {
+        id
+        name
+        type
+      }
+      episode {
+        id
+        name
+        air_date
+        episode
+      }
+    }
+  }
+}
+```
+
+#### Retrieve a Character by ID
+
+```graphql
+query {
+  character(id: 1) {
+    id
+    name
+    image
+    status
+    species
+    location {
+      id
+      name
+      type
+    }
+    origin {
+      id
+      name
+      type
+    }
+    episode {
+      id
+      name
+      air_date
+      episode
+    }
+  }
+}
+```
+
+### Errors
+
+Errors follow standard GraphQL error handling.
+
+## Access Deployed Version
+
+- **Client**: [Rick and Morty Character Browser Client](https://rick-morty-character-browser.h1zqeel.com/)
+- **Backend**: [Rick and Morty Character Browser Backend GraphQL](https://rick-morty-character-browser-backend.onrender.com/graphql)
