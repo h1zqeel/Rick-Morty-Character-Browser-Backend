@@ -1,6 +1,12 @@
 import axios from './axios.js';
 import { CharacterParams } from '../interfaces/Filter.js';
 import { Character } from '../interfaces/Character.js';
+import {
+	createCachedData,
+	getCachedData,
+	getCharactersKey,
+	getCharacterKey
+} from './cache.js';
 const END_POINT = '/graphql';
 
 function sortCharactersByName(array: Character[], order: string) {
@@ -121,4 +127,35 @@ const getCharacter = async (id: number) => {
 	return response.data.data.character;
 };
 
-export { getcharacters, getCharacter };
+const getCachedCharacters = async ({
+	page = 1,
+	filter = {},
+	order,
+	name
+}: CharacterParams) => {
+	const cachedData = await getCachedData(
+		getCharactersKey(page, filter, order, name)
+	);
+
+	if (cachedData) return cachedData;
+
+	const data = await getcharacters({ page, filter, order, name });
+
+	await createCachedData(getCharactersKey(page, filter, order, name), data);
+
+	return data;
+};
+
+const getCachedCharacter = async (id: number) => {
+	const cachedData = await getCachedData(getCharacterKey(id));
+
+	if (cachedData) return cachedData;
+
+	const data = await getCharacter(id);
+
+	await createCachedData(getCharacterKey(id), data);
+
+	return data;
+};
+
+export { getCachedCharacter, getCachedCharacters };

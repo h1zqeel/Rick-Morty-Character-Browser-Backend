@@ -1,4 +1,7 @@
-import { getCharacter, getcharacters } from '../../data/characters.js';
+import {
+	getCachedCharacter,
+	getCachedCharacters
+} from '../../data/characters.js';
 import { GraphQLError } from 'graphql';
 import {
 	CharacterParams,
@@ -10,7 +13,7 @@ const characters = async (
 	{ page, filter = {}, order, name }: CharacterParams
 ) => {
 	try {
-		const data = await getcharacters({ page, filter, order, name });
+		const data = await getCachedCharacters({ page, filter, order, name });
 		return data;
 	} catch (error) {
 		console.log({ error });
@@ -22,7 +25,7 @@ const characters = async (
 
 const character = async (_: unknown, { id }: SingleCharacterParams) => {
 	try {
-		const data = await getCharacter(id);
+		const data = await getCachedCharacter(id);
 		return data;
 	} catch (error) {
 		throw new GraphQLError(
