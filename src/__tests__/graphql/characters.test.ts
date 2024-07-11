@@ -1,5 +1,5 @@
 import request from 'supertest';
-import createServer from '../../server.js';
+import {createServer} from '../../server.js';
 import nock from 'nock';
 import {
 	testCharacterData,

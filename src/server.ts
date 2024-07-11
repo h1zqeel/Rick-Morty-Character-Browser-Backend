@@ -24,4 +24,21 @@ const createServer = async () => {
 	return httpServer;
 };
 
-export default createServer;
+const createApp = async () => {
+	const app = express();
+	const httpServer = http.createServer(app);
+
+	const server = new ApolloServer({
+		typeDefs,
+		resolvers,
+		plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
+	});
+
+	await server.start();
+
+	app.use('/graphql', cors(), express.json(), expressMiddleware(server));
+
+	return app;
+}
+
+export {createServer, createApp};
