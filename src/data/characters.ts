@@ -41,9 +41,7 @@ const getcharacters = async ({
 		filterQuery += `species: "${filter.species}", `;
 	}
 
-	const graphqlQuery = {
-		operationName: 'fetchCharacters',
-		query: `query Query {
+	const GET_CHARACTERS_QUERY = `query Query {
 					characters(page: ${page}, filter: {${filterQuery}}) {
 						info {
 							count,
@@ -59,12 +57,10 @@ const getcharacters = async ({
 							species
 						}
 					}
-				}`,
-		variables: {}
-	};
+				}`;
 
 	const response = await axios.post(END_POINT, {
-		query: graphqlQuery.query
+		query: GET_CHARACTERS_QUERY
 	});
 
 	if (order) {
@@ -85,9 +81,7 @@ const getcharacters = async ({
 };
 
 const getCharacter = async (id: number) => {
-	const graphqlQuery = {
-		operationName: 'fetchCharacter',
-		query: `query Query {
+	const GET_CHARACTER_QUERY = `query Query {
 					character(id: ${id}) {
 						id,
 						name,
@@ -116,12 +110,10 @@ const getCharacter = async (id: number) => {
 							created
 						},
 					}
-				}`,
-		variables: {}
-	};
+				}`;
 
 	const response = await axios.post(END_POINT, {
-		query: graphqlQuery.query
+		query: GET_CHARACTER_QUERY
 	});
 
 	return response.data.data.character;

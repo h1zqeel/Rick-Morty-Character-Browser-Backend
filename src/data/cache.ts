@@ -17,7 +17,13 @@ const getClient = async () => {
 };
 
 const getCharactersKey = (page, filter, order, name) => {
-	return `characters:${page}:${JSON.stringify(filter)}:${order}:${name}`;
+	let key = `characters:${page}`;
+	if (filter.status && filter.status !== ' ') key += `:${filter.status}`;
+	if (filter.species && filter.species !== ' ') key += `:${filter.species}`;
+	if (order) key += `:${order}`;
+	if (name) key += `:${name}`;
+
+	return key;
 };
 
 const getCharacterKey = (id) => {
