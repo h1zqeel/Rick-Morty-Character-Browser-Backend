@@ -220,3 +220,4 @@ Errors follow standard GraphQL error handling.
 
 - **Client**: [Rick and Morty Character Browser Client](https://rick-morty-character-browser.h1zqeel.com/)
 - **Backend**: [Rick and Morty Character Browser Backend GraphQL](https://rick-morty-character-browser-backend.onrender.com/graphql)
+- As I have utilised Render for Backend Deployment the Backend API Instance Spins down after 15 minutes of Activity, it gets back up on next incoming request which takes almost 1 Minute. Read More: https://docs.render.com/free#spinning-down-on-idle
