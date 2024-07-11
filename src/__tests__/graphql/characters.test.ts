@@ -51,25 +51,26 @@ describe('GraphQL API', function () {
 
 			expect(response.body.data.characters.results).toHaveLength(2);
 
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('id');
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('name');
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('image');
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('status');
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('species');
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'id'
+			);
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'name'
+			);
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'image'
+			);
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'status'
+			);
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'species'
+			);
 
-			expect(response.body.data.characters.info)
-				.toHaveProperty('count');
-			expect(response.body.data.characters.info)
-				.toHaveProperty('pages');
-			expect(response.body.data.characters.info)
-				.toHaveProperty('next');
-			expect(response.body.data.characters.info)
-				.toHaveProperty('prev');
+			expect(response.body.data.characters.info).toHaveProperty('count');
+			expect(response.body.data.characters.info).toHaveProperty('pages');
+			expect(response.body.data.characters.info).toHaveProperty('next');
+			expect(response.body.data.characters.info).toHaveProperty('prev');
 		});
 
 		it('should return data with queried fields', async function () {
@@ -93,28 +94,32 @@ describe('GraphQL API', function () {
 				.send({ query })
 				.expect(200);
 
-			expect(response.body.data.characters.results)
-				.toHaveLength(2);
+			expect(response.body.data.characters.results).toHaveLength(2);
 
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('name');
-			expect(response.body.data.characters.results[0])
-				.toHaveProperty('image');
-			expect(response.body.data.characters.results[0])
-				.not.toHaveProperty('id');
-			expect(response.body.data.characters.results[0])
-				.not.toHaveProperty('status');
-			expect(response.body.data.characters.results[0])
-				.not.toHaveProperty('species');
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'name'
+			);
+			expect(response.body.data.characters.results[0]).toHaveProperty(
+				'image'
+			);
+			expect(response.body.data.characters.results[0]).not.toHaveProperty(
+				'id'
+			);
+			expect(response.body.data.characters.results[0]).not.toHaveProperty(
+				'status'
+			);
+			expect(response.body.data.characters.results[0]).not.toHaveProperty(
+				'species'
+			);
 
-			expect(response.body.data.characters.info)
-				.toHaveProperty('count');
-			expect(response.body.data.characters.info)
-				.toHaveProperty('pages');
-			expect(response.body.data.characters.info)
-				.not.toHaveProperty('next');
-			expect(response.body.data.characters.info)
-				.not.toHaveProperty('prev');
+			expect(response.body.data.characters.info).toHaveProperty('count');
+			expect(response.body.data.characters.info).toHaveProperty('pages');
+			expect(response.body.data.characters.info).not.toHaveProperty(
+				'next'
+			);
+			expect(response.body.data.characters.info).not.toHaveProperty(
+				'prev'
+			);
 		});
 	});
 
@@ -143,16 +148,11 @@ describe('GraphQL API', function () {
 				.send({ query })
 				.expect(200);
 
-			expect(response.body.data.character)
-				.toHaveProperty('id');
-			expect(response.body.data.character)
-				.toHaveProperty('name');
-			expect(response.body.data.character)
-				.toHaveProperty('image');
-			expect(response.body.data.character)
-				.toHaveProperty('status');
-			expect(response.body.data.character)
-				.toHaveProperty('species');
+			expect(response.body.data.character).toHaveProperty('id');
+			expect(response.body.data.character).toHaveProperty('name');
+			expect(response.body.data.character).toHaveProperty('image');
+			expect(response.body.data.character).toHaveProperty('status');
+			expect(response.body.data.character).toHaveProperty('species');
 		});
 
 		it('should return data with location and episodes field', async function () {
@@ -177,35 +177,42 @@ describe('GraphQL API', function () {
 				.send({ query })
 				.expect(200);
 
-			expect(response.body.data.character)
-				.toHaveProperty('name');
-			expect(response.body.data.character)
-				.toHaveProperty('location');
-			expect(response.body.data.character)
-				.toHaveProperty('episode');
+			expect(response.body.data.character).toHaveProperty('name');
+			expect(response.body.data.character).toHaveProperty('location');
+			expect(response.body.data.character).toHaveProperty('episode');
 
-			expect(response.body.data.character.location)
-				.toHaveProperty('name');
-			expect(response.body.data.character.location)
-				.toHaveProperty('type');
-			expect(response.body.data.character.location)
-				.not.toHaveProperty('id');
-			expect(response.body.data.character.location)
-				.not.toHaveProperty('dimension');
-			expect(response.body.data.character.location)
-				.not.toHaveProperty('created');
+			expect(response.body.data.character.location).toHaveProperty(
+				'name'
+			);
+			expect(response.body.data.character.location).toHaveProperty(
+				'type'
+			);
+			expect(response.body.data.character.location).not.toHaveProperty(
+				'id'
+			);
+			expect(response.body.data.character.location).not.toHaveProperty(
+				'dimension'
+			);
+			expect(response.body.data.character.location).not.toHaveProperty(
+				'created'
+			);
 
-			expect(response.body.data.character.episode)
-				.toHaveLength(1);
-			expect(response.body.data.character.episode[0]).toHaveProperty('name');
-			expect(response.body.data.character.episode[0])
-				.toHaveProperty('air_date');
-			expect(response.body.data.character.episode[0])
-				.not.toHaveProperty('id');
-			expect(response.body.data.character.episode[0])
-				.not.toHaveProperty('episode');
-			expect(response.body.data.character.episode[0])
-				.not.toHaveProperty('created');
+			expect(response.body.data.character.episode).toHaveLength(1);
+			expect(response.body.data.character.episode[0]).toHaveProperty(
+				'name'
+			);
+			expect(response.body.data.character.episode[0]).toHaveProperty(
+				'air_date'
+			);
+			expect(response.body.data.character.episode[0]).not.toHaveProperty(
+				'id'
+			);
+			expect(response.body.data.character.episode[0]).not.toHaveProperty(
+				'episode'
+			);
+			expect(response.body.data.character.episode[0]).not.toHaveProperty(
+				'created'
+			);
 		});
 	});
 });

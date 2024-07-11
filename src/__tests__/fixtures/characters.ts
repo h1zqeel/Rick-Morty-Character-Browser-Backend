@@ -1,4 +1,3 @@
-
 const testCharactersData = {
 	data: {
 		characters: {
@@ -37,7 +36,7 @@ const testCharacterData = {
 			status: 'Alive',
 			species: 'Human',
 			location: {
-				id: "20",
+				id: '20',
 				name: 'Earth (Replacement Dimension)',
 				type: 'Planet',
 				dimension: 'Replacement Dimension',
@@ -45,7 +44,7 @@ const testCharacterData = {
 			},
 			episode: [
 				{
-					id: "1",
+					id: '1',
 					name: 'Pilot',
 					air_date: 'December 2, 2013',
 					episode: 'S01E01',
