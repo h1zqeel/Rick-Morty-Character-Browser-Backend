@@ -16,9 +16,10 @@ const characters = async (
 		const data = await getCachedCharacters({ page, filter, order, name });
 		return data;
 	} catch (error) {
-		console.log({ error });
 		throw new GraphQLError(
-			error.message ?? 'An error occurred while fetching characters'
+			error.message ?? 'An error occurred while fetching characters', {
+				extensions: {code: 'INTERNAL_SERVER_ERROR'}
+			}
 		);
 	}
 };
@@ -29,7 +30,9 @@ const character = async (_: unknown, { id }: SingleCharacterParams) => {
 		return data;
 	} catch (error) {
 		throw new GraphQLError(
-			error.message ?? 'An error occurred while fetching character'
+			error.message ?? 'An error occurred while fetching characters', {
+				extensions: {code: 'INTERNAL_SERVER_ERROR'}
+			}
 		);
 	}
 };
