@@ -1,5 +1,5 @@
 import { createClient } from 'redis';
-const TTL = 60 * 2; // 2 minutes
+const TTL = 60 * 30; // 15 minutes
 
 let cachedClient = null;
 
