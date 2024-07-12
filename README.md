@@ -149,7 +149,7 @@ type Character {
 
 ```graphql
 query {
-  characters(page: 1, filter: { status: "Alive", species: "Human" }, order: "name") {
+  characters(page: 1, filter: { status: "Alive", species: "Human" }, order: "asc") {
     info {
       count
       pages
