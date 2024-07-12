@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+const TTL = 60 * 2; // 2 minutes
 
 let cachedClient = null;
 
@@ -34,7 +35,7 @@ const createCachedData = async (key, data) => {
 	const client = await getClient();
 	if (!client) return;
 
-	await client.set(key, JSON.stringify(data));
+	await client.set(key, JSON.stringify(data), {EX: TTL });
 };
 
 const getCachedData = async (key) => {
