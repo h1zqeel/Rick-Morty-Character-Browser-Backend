@@ -73,51 +73,62 @@ Retrieve a list of characters with pagination support.
 
 - `page`: Optional. Page number for pagination.
 - `filter`: Optional. Filter characters by status or species
-- `order`: Optional. Sort order for results.
+- `order`: Optional. Sort order by name ("asc", "desc")
 
 ##### Response
 
 ```graphql
-type PaginatedCharacters {
-  info: CharacterPaginationInfo
-  results: [Character]
-}
+  type Character {
+    id: ID
+    name: String
+    image: String
+    status: String
+    species: String
+    location: Location
+    origin: Location
+    episode: [Episode]
+  }
 
-type CharacterPaginationInfo {
-  count: Int
-  pages: Int
-  next: Int
-  prev: Int
-}
+  type Location {
+    id: ID
+    name: String
+    type: String
+    dimension: String
+    residents: [Character]!
+    created: String
+  }
 
-type Character {
-  id: ID
-  name: String
-  image: String
-  status: String
-  species: String
-  location: Location
-  origin: Location
-  episode: [Episode]
-}
+  type Episode {
+    id: ID
+    name: String
+    air_date: String
+    episode: String
+    characters: [Character]!
+    created: String
+  }
 
-type Location {
-  id: ID
-  name: String
-  type: String
-  dimension: String
-  residents: [Character]!
-  created: String
-}
+  type CharacterPaginationInfo {
+    count: Int
+    pages: Int
+    next: Int
+    prev: Int
+  }
 
-type Episode {
-  id: ID
-  name: String
-  air_date: String
-  episode: String
-  characters: [Character]!
-  created: String
-}
+  type PaginatedCharacters {
+    info: CharacterPaginationInfo
+    results: [Character]
+  }
+
+  input CharacterFilter {
+    status: String
+    species: String
+    name: String
+  }
+
+  type Query {
+    characters(page: Int, filter: CharacterFilter, order: String): PaginatedCharacters
+    character(id: Int!): Character
+  }
 ```
 
 #### `character`
