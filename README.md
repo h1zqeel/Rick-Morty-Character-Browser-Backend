@@ -72,7 +72,7 @@ Retrieve a list of characters with pagination support.
 ##### Arguments
 
 - `page`: Optional. Page number for pagination.
-- `filter`: Optional. Filter characters by status, species, or name.
+- `filter`: Optional. Filter characters by status or species
 - `order`: Optional. Sort order for results.
 
 ##### Response
