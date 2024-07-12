@@ -19,6 +19,7 @@ const createServer = async () => {
 
 	await server.start();
 
+	app.use('/', (req, res) => { res.send('Hello World!').end(); });
 	app.use('/graphql', cors(), express.json(), expressMiddleware(server));
 
 	return httpServer;
