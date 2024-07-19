@@ -46,4 +46,19 @@ const getCachedData = async (key) => {
 	return data ? JSON.parse(data) : null;
 };
 
+const handleExit = async () => {
+	if (cachedClient) {
+		try {
+			await cachedClient.quit();
+		} catch (error) {
+			console.error('Error quitting Redis client:', error.message);
+		}
+	}
+	process.exit();
+};
+
+process.on('exit', handleExit);
+process.on('SIGINT', handleExit);
+process.on('SIGTERM', handleExit);
+
 export { createCachedData, getCachedData, getCharactersKey, getCharacterKey };
