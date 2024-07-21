@@ -16,6 +16,7 @@ const characters = async (
 		const data = await getCachedCharacters({ page, filter, order, name });
 		return data;
 	} catch (error) {
+		console.log(error.response.data);
 		throw new GraphQLError(
 			error.message ?? 'An error occurred while fetching characters', {
 				extensions: {code: 'INTERNAL_SERVER_ERROR'}
