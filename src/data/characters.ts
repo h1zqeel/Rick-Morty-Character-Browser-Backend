@@ -31,18 +31,8 @@ const getcharacters = async ({
 	order,
 	name
 }: CharacterParams) => {
-	let filterQuery = '';
-
-	if (filter.status) {
-		filterQuery += `status: "${filter.status}", `;
-	}
-
-	if (filter.species) {
-		filterQuery += `species: "${filter.species}", `;
-	}
-
-	const GET_CHARACTERS_QUERY = `query Query {
-					characters(page: ${page}, filter: {${filterQuery}}) {
+	const GET_CHARACTERS_QUERY = `query Query($page: Int!, $status: String, $species: String) {
+					characters(page: $page, filter: {status: $status, species: $species}) {
 						info {
 							count,
 							pages,
@@ -60,7 +50,12 @@ const getcharacters = async ({
 				}`;
 
 	const response = await axios.post(END_POINT, {
-		query: GET_CHARACTERS_QUERY
+		query: GET_CHARACTERS_QUERY,
+		variables: {
+			page: page,
+			status: filter.status || null,
+			species: filter.species || null
+		}
 	});
 
 	if (order) {
